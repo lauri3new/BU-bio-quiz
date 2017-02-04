@@ -1,7 +1,7 @@
 var path = require("path");
 var webpack = require("webpack");
 
-var DIST_DIR = path.resolve(__dirname, "../LoJBack/public");
+var DIST_DIR = path.resolve(__dirname, "./dist/app");
 var SRC_DIR = path.resolve(__dirname, "src");
 
 var config = {
