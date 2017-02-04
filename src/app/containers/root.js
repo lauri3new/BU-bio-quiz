@@ -1,8 +1,8 @@
 import React from "react";
 import { Router, Route, browserHistory, IndexRedirect } from "react-router";
 import { Provider } from "react-redux";
-import Landing from "./landing";
-import App from "./app";
+import Landing from "../components/landing";
+import App from "../components/app";
 import Quiz from "./quiz";
 
 const Root = ({ store }) => (
