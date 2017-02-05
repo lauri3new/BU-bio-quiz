@@ -1,18 +1,25 @@
 import React from 'react';
 import { connect } from "react-redux";
 import Question from './question';
-import { userAnswer } from '../actions/actions';
+import Results from './results';
+import { goBack } from '../actions/actions';
 
 const Quiz = props => (
   <div className="container" >
-    <button onClick={() => props.userAnswer()}>click me</button>
     { props.current < props.questions.length
-      ? <Question
+      ? <div><Question
           title={props.questions[props.current].title}
           answers={props.questions[props.current].answers}
           type={props.questions[props.current].type}
         />
-      : <div>the end!</div> }
+
+        </div>
+      : <Results />}
+    { (props.current < props.questions.length && props.current > 0) 
+      ?         <button onClick={() => props.goBack()}>
+                Back
+              </button>
+      : null}
   </div>
 );
 
@@ -21,12 +28,10 @@ const mapStateToProps = state => ({
   current: state.currentQuestion
 });
 
-// mapDispatchToProps maps functions (action creators) that use dispatch methods
-// to this.props so that they will be availble also from this.props locally
 const mapDispatchToProps = (dispatch) => {
   return {
-    userAnswer() {
-      dispatch(userAnswer());
+    goBack() {
+      dispatch(goBack());
     },
   };
 };

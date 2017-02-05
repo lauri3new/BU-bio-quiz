@@ -1,13 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { userAnswer } from '../actions/actions';
 
 const BinaryAnswer = props => (
-  <div>
-    {props.answers.map((answer) => {
+  <div className="container">
+    {props.answers.map((answerobj) => {
       return (
-        <div key={answer}><div>{answer}</div><button> yay or naye </button></div>
+        <div key={answerobj.answer} className="row">
+          <h2>{answerobj.answer}</h2>
+          <button
+            onClick={() => props.userAnswer({0: answerobj})}
+            className="btn btn-default"
+          >
+             yay or naye
+          </button>
+        </div>
       );
     })}
   </div>
 );
 
-export default BinaryAnswer;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userAnswer(course) {
+      dispatch(userAnswer(course));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(BinaryAnswer);

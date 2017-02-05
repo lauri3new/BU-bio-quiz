@@ -13,7 +13,7 @@ const Question = (props) => {
     };
   return (
   <div>
-    <h3>{props.title}</h3>
+    <h1>{props.title}</h1>
     {answer()}
   </div>
 )

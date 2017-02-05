@@ -3,6 +3,10 @@ const currentQuestionReducer = (state = 0, action) => {
     case "ANSWER_QUESTION":
       return state = state + 1;
   }
+  switch (action.type) {
+    case "GO_BACK":
+    return state = state - 1;
+  }
   return state;
 };
 

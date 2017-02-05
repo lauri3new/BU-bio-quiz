@@ -4,6 +4,7 @@
   "browser": 1
   },
   "rules": {
+  "max-len": 0,
   "no-return-assign": 0,
   "no-param-reassign": 0,
   "react/jsx-filename-extension": 0,

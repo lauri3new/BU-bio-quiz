@@ -7,8 +7,8 @@ const Department = props => (
     <h1>{props.subject}</h1>
     <h3>{props.description}</h3>
     {props.internal === true
-      ? <Link to={props.link}><button className="btn btn-default"> CHOOSE ME</button></Link>
-      : <a href={props.link} target="_blank"><button className="btn btn-default"> CHOOSE ME</button></a>}
+      ? <Link to={props.link}><button className="btn btn-default"> Take the Quiz!</button></Link>
+      : <a href={props.link} target="_blank"><button className="btn btn-default"> Find out more </button></a>}
   </div>
 );
 
