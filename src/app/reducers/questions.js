@@ -5,27 +5,27 @@ const initialState = [
         answer: 'doc',
         course: 'BIOMED'
       },
-      {
-        answer: 'scientist',
-        course: 'BIOCHEM'
-      },
-      {
-        answer: 'brain surgeon',
-        course: 'NEURO'
-      },
-      {
-        answer: 'pharmacist',
-        course: 'CMM'
-      },
-      {
-        answer: 'drug dispenser',
-        course: 'PHARMA'
-      },
+      // {
+      //   answer: 'scientist',
+      //   course: 'BIOCHEM'
+      // },
+      // {
+      //   answer: 'brain surgeon',
+      //   course: 'NEURO'
+      // },
+      // {
+      //   answer: 'pharmacist',
+      //   course: 'CMM'
+      // },
+      // {
+      //   answer: 'drug dispenser',
+      //   course: 'PHARMA'
+      // },
       {
         answer: 'footbal trainer',
         course: 'PHYSIO'
       }],
-    type: 'binary'
+    type: 'rating'
   },
   { title: 'How do you rate your interest in these things?',
     answers: [
@@ -41,10 +41,11 @@ const initialState = [
         answer: 'understanding conciousness',
         course: 'NEURO'
       },
-      {
-        answer: 'discovering new drugs and learning process of how they are made',
-        course: 'CMM'
-      },
+    ],
+    type: 'rating'
+  },
+  { title: 'How do you rate your interest in these things?',
+    answers: [
       {
         answer: 'Interacting with people and ensuring treatments are given to right people',
         course: 'PHARMA'

@@ -1,6 +1,8 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import { userAnswer } from '../actions/actions';
+import { userAnswer, goBack } from '../actions/actions';
+import Styles from './ratinganswer.css';
 
 class RatingAnswer extends React.Component {
   constructor(props) {
@@ -11,52 +13,102 @@ class RatingAnswer extends React.Component {
     }
   }
 
+  componentDidMount() {
+    console.log(this.props.currentQuestion);
+    if (this.props.storedAnswers[this.props.currentQuestion])
+      {
+        this.setState({
+          radio: this.props.storedAnswers[this.props.currentQuestion],
+          attempted: false
+        });
+      }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.storedAnswers[nextProps.currentQuestion] !== undefined)
+      {
+        this.setState({
+          radio: nextProps.storedAnswers[nextProps.currentQuestion],
+          attempted: false
+        });
+      }
+    else {
+      this.setState({
+        radio: {},
+        attempted: false
+      });
+    }
+  }
+
   render() {
     return (
-  <div>
-    {this.state.attempted === true ? <div>hello try again</div> : null}
+  <div >
+    {this.state.attempted === true ? <div className="alert">hello please answer all questions</div> : null}
+    <ReactCSSTransitionGroup
+      transitionName={Styles}
+      transitionAppear
+      transitionAppearTimeout={1000}
+      transitionEnterTimeout={1000}
+      transitionLeaveTimeout={1000}
+    >
+      <div key={this.props.currentQuestion} style={{ position: "absolute" }}>
+              <h1 key={this.props.title}>{this.props.title}</h1>
     {this.props.answers.map((answerobj, i) => {
       return (
-        <div className="container">
-        <div key={answerobj.answer + i} className="row">
+        <div key={answerobj.answer + 0} className="container" >
+        <div className="row">
           <h2>{answerobj.answer}</h2>
         </div>
         <div className="row">
-          <div key="ok" className="checkbox col-sm-4">
+          <div className="checkbox col-sm-4">
+              <br />
+<br />
             <input
               type="radio"
               onClick={() => this.handleClick(answerobj, i, 1)}
               name={answerobj.answer}
+              defaultChecked={this.props.storedAnswers[this.props.currentQuestion] && (this.props.storedAnswers[this.props.currentQuestion][`${i}`].rating === 1) ? true : false}
             />
             <label><h4> not at all </h4></label>
           </div>
-          <div key="nok" className="checkbox col-sm-4">
+          <div className="checkbox col-sm-4">
+
             <input
               type="radio"
               onClick={() => this.handleClick(answerobj, i, 2)}
               name={answerobj.answer}
+              defaultChecked={this.props.storedAnswers[this.props.currentQuestion] && (this.props.storedAnswers[this.props.currentQuestion][`${i}`].rating === 2) ? true : false}
             />
             <label><h4> average </h4></label>
           </div>
-          <div key="nope"  className="checkbox col-sm-4">
+          <div className="checkbox col-sm-4">
+
             <input
               type="radio"
               onClick={() => this.handleClick(answerobj, i, 3)}
               name={answerobj.answer}
+              defaultChecked={this.props.storedAnswers[this.props.currentQuestion] && (this.props.storedAnswers[this.props.currentQuestion][`${i}`].rating === 3) ? true : false}
             />
             <label><h4> great </h4></label>
           </div>
         </div>
         </div>
       );
-    })}
-
+    }
+  )}
+  <div className="row">
   <button
     onClick={() => this.handleSubmit()}
     className="btn btn-primary"
   >
     SUBMIT ANSWERS
   </button>
+  { this.props.currentQuestion > 0 ?  <button className="btn btn-primary" onClick={() => this.props.goBack()}>Back</button> : null}
+  </div>
+          </div>
+
+  </ReactCSSTransitionGroup>
+
   </div>
 );}
 
@@ -75,17 +127,14 @@ handleClick(answer, key, rating) {
 }
 
 handleSubmit() {
-  console.log(Object.keys(this.state.radio).length);
-  console.log(this.state, this.props.answers.length);
   if (Object.keys(this.state.radio).length === this.props.answers.length)
     {
-      this.props.userAnswer(this.state.radio);
+      this.props.userAnswer(this.state.radio, this.props.currentQuestion);
     }
   else { this.setState({
           ...this.state,
-    attempted: true
-  });
-  console.log('helo');
+          attempted: true
+        });
   }
 }
 
@@ -93,10 +142,18 @@ handleSubmit() {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    userAnswer(course) {
-      dispatch(userAnswer(course));
+    userAnswer(answer, question) {
+      dispatch(userAnswer(answer, question));
+    },
+    goBack() {
+      dispatch(goBack());
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(RatingAnswer);
+const mapStateToProps = state => ({
+  storedAnswers: state.answers,
+  currentQuestion: state.currentQuestion
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RatingAnswer);

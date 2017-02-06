@@ -1,11 +1,13 @@
 const answersReducer = (state = [], action) => {
   switch (action.type) {
     case "ANSWER_QUESTION":
-      return [...state, action.payload];
+      let x = {};
+      x[action.number] = action.payload;
+      return state = Object.assign([], state, x);
   }
   switch (action.type) {
     case "GO_BACK":
-      return state = state.slice(0, -1);
+      return state;
   }
   return state;
 };

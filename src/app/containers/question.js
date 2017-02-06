@@ -5,15 +5,14 @@ import RatingAnswer from '../components/ratinganswer';
 const Question = (props) => {
     const answer = () => {
       if (props.type === 'binary') {
-        return (<BinaryAnswer answers={props.answers} />)
+        return (<BinaryAnswer answers={props.answers} title={props.title} />)
       }
       if (props.type == 'rating') {
-        return (<RatingAnswer answers={props.answers} />)
+        return (<RatingAnswer answers={props.answers} title={props.title} />)
       }
     };
   return (
   <div>
-    <h1>{props.title}</h1>
     {answer()}
   </div>
 )

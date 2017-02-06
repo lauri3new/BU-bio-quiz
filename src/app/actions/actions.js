@@ -1,8 +1,9 @@
 
-export const userAnswer = (answer) => {
+export const userAnswer = (answer, question) => {
   return ({
     type: `ANSWER_QUESTION`,
-    payload: answer
+    payload: answer,
+    number: question
   });
 };
 

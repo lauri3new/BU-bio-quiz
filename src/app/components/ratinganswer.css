@@ -1,0 +1,45 @@
+.enter {
+  opacity: 0;
+}
+
+.enter.enterActive {
+  animation: fade-in 1000ms forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.leave.leaveActive {
+  animation: fade-out 1000ms forwards;
+}
+
+@keyframes fade-out {
+  0% {
+      opacity: 1;
+  }
+  25% {
+      opacity: 0;
+  }
+  100% {
+  opacity: 0;
+  }
+}
+
+.appear {
+  opacity: 0.1;
+  transition: opacity 1000ms ease-out;
+}
+
+.appearActive {
+  opacity: 1;
+  transition: opacity 1000ms ease-out;
+}
