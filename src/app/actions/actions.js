@@ -12,3 +12,10 @@ export const goBack = () => {
     type: `GO_BACK`
   });
 };
+
+export const userSubjects = (subjects) => {
+  return ({
+    type: `ANSWER_SUBJECTS`,
+    payload: subjects
+  })
+}

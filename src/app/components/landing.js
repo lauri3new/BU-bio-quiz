@@ -6,7 +6,7 @@ const Landing = props => (
     <Department
       subject="Biomedical Sciences"
       description="Welcome to the Faculty of Biomedical Sciences, where scientists and students are involved in research and education about the fundamental principles that underpin clinical practice and shape our understanding of human and animal function."
-      link="quiz"
+      link="subjects"
       internal
     />
     <Department

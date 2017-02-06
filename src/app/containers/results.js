@@ -51,15 +51,31 @@ const Results = props => {
       }
   });
   let subjects = [
-    {course:'BIOMED', rating: biomed, evidence:biomedE},
-    {course:'BIOCHEM', rating: biochem, evidence:biochemE},
-    {course:'CMM', rating: cmm, evidence:cmmE},
-    {course:'NEURO', rating: neuro, evidence:neuroE },
-    {course:'PHARMA', rating: pharma, evidence:pharmaE },
-    {course:'PHYSIO', rating: physio, evidence:physioE },
+    {course:'BIOMED', rating: biomed, evidence:biomedE, requisites:'Chemistry'},
+    {course:'BIOCHEM', rating: biochem, evidence:biochemE, requisites:'Chemistry'},
+    {course:'CMM', rating: cmm, evidence:cmmE, requisites:'Chemistry' },
+    {course:'NEURO', rating: neuro, evidence:neuroE, },
+    {course:'PHARMA', rating: pharma, evidence:pharmaE, requisites:'Chemistry' },
+    {course:'PHYSIO', rating: physio, evidence:physioE, },
   ];
-  const sortedSubjects = subjects.sort((a,b) => (a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0) );
-  console.log(sortedSubjects);
+
+  const filteredSorted = subjects.filter((a) => {
+    if (a.requisites && (a.requisites === 'Chemistry'))
+    {
+        if (props.userSubjects.Chemistry === true)
+        {
+          return true;
+        }
+        else {
+          return false;
+        }
+    }
+    else {
+      return true;
+    }
+  });
+
+  const sortedSubjects = filteredSorted.sort((a,b) => (a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0) );
   return (
     <div className="container">
       <div className="alert alert-success" style={{ marginTop: '20px'}}><strong>Congratulations!</strong> you finished the quiz!</div>
@@ -85,7 +101,8 @@ const Results = props => {
 };
 
 const mapStateToProps = state => ({
-  answers: state.answers
+  answers: state.answers,
+  userSubjects: state.userSubjects
 });
 
 // connect hooks up mapStateToProps and mapDispatchToProps to named component
