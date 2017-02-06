@@ -43,7 +43,7 @@ class RatingAnswer extends React.Component {
   render() {
     return (
   <div >
-    {this.state.attempted === true ? <div className="alert">hello please answer all questions</div> : null}
+
     <ReactCSSTransitionGroup
       transitionName={Styles}
       transitionAppear
@@ -52,6 +52,7 @@ class RatingAnswer extends React.Component {
       transitionLeaveTimeout={1000}
     >
       <div key={this.props.currentQuestion} style={{ position: "absolute" }}>
+      {this.state.attempted === true ? <div className="alert alert-warning" style={{ marginTop: '20px'}} >Please answer <strong>all</strong> questions</div> : null}
               <h1 key={this.props.title}>{this.props.title}</h1>
     {this.props.answers.map((answerobj, i) => {
       return (
@@ -61,8 +62,6 @@ class RatingAnswer extends React.Component {
         </div>
         <div className="row">
           <div className="checkbox col-sm-4">
-              <br />
-<br />
             <input
               type="radio"
               onClick={() => this.handleClick(answerobj, i, 1)}
@@ -97,13 +96,19 @@ class RatingAnswer extends React.Component {
     }
   )}
   <div className="row">
+    <div className="col-sm-5"></div>
+    <div className="col-sm-1">
+      { this.props.currentQuestion > 0 ?  <button className="btn btn-primary" onClick={() => this.props.goBack()}>Back</button> : null}
+    </div>
+    <div className="col-sm-1">
   <button
     onClick={() => this.handleSubmit()}
     className="btn btn-primary"
   >
-    SUBMIT ANSWERS
+    Next
   </button>
-  { this.props.currentQuestion > 0 ?  <button className="btn btn-primary" onClick={() => this.props.goBack()}>Back</button> : null}
+</div>
+
   </div>
           </div>
 

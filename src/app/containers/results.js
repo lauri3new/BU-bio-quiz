@@ -62,6 +62,7 @@ const Results = props => {
   console.log(sortedSubjects);
   return (
     <div className="container">
+      <div className="alert alert-success" style={{ marginTop: '20px'}}><strong>Congratulations!</strong> you finished the quiz!</div>
       <div className="row">
         <h1>Your top course is {sortedSubjects[0].course}</h1>
         <h2>Course info</h2>
